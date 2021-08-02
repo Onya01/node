@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="/public/css/main.css">
+ <title>Testing client side</title>
+</head>
+
+<body>
+ <div class="container">
+  <form action="/" method="POST" id="form">
+   <div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" name="email">
+   </div>
+   <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" name="password">
+   </div>
+   <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  <div class="col-lg-4"></div>
+ </div>
+ <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ <script>
+  $(document).ready(() => {
+   $('#form').submit((e) => {
+    e.preventDefault();
+    $.ajax({
+     url: '/',
+     type: 'post',
+     contentType: 'application/json',
+     data: JSON.stringify($('#form').serializeArray()),
+     success: (response) => {
+      console.log('successfully got response');
+      console.log(response);
+     }
+    });
+   });
+  });
+ </script>
+</body>
+
+</html>
